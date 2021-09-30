@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Book Store</title>
+</head>
+
+<body>
+    <h1>Book Store</h1>
+    <div id="app">
+        <h2>Get All</h2>
+        <button id="getAllButton" v-on:click="getAllBooks" class="btn btn-primary">Get all books</button>
+        <br />
+        <input v-model="titleToGetBy" placeholder="title" type="text" />
+        <button v-on:click="getByTitle(titleToGetBy)" class="btn btn-primary">Get by title</button>
+
+        <ul id="booklist" v-if="Books.length">
+            <li v-for="book in Books">
+                {{book.id}} {{book.title}} : {{ book.price}}
+            </li>
+        </ul>
+        <div v-else>No books</div>
+
+        <h2>Get by ID</h2>
+        <input v-model="idToGetBy" placeholder="id" type="number" />
+        <button v-on:click="getById(idToGetBy)" class="btn btn-primary">Get by id</button>
+        <div v-if="singleBook">
+            {{singleBook.id}} {{singleBook.title}} {{ singleBook.price}}
+        </div>
+        <div v-else>No such book</div>
+
+        <h2>Delete</h2>
+        <input v-model.number="deleteId" placeholder="id" type="number" />
+        <button v-on:click="deleteBook(deleteId)" class="btn btn-warning">Delete</button>
+        {{deleteMessage}}
+
+        <h2>Add</h2>
+        <input v-model="addData.title" placeholder="title" type="text" />
+        <input v-model.number="addData.price" placeholder="price" type="number" />
+        <button v-on:click="addBook()" class="btn btn-success">Add</button>
+        <div>{{addMessage}}</div>
+
+        <h2>Update</h2>
+        <input v-model.number="updateData.id" placeholder="id" type="number" />
+        <input v-model="updateData.title" placeholder="title" type="text" />
+        <input v-model.number="updateData.price" placeholder="price" type="number" />
+        <button v-on:click="updateBook()" class="btn btn-success">Update</button>
+        <div>{{updateMessage}}</div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+</html>
